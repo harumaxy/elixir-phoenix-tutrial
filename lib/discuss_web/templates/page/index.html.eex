@@ -1,5 +1,6 @@
 <section class="phx-hero">
   <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
+
   <p>Peace of mind from prototype to production</p>
 </section>
 
@@ -34,7 +35,10 @@
         <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
       </li>
       <li>
-        <a href="https://google.com">Google</a>
+        <a href="google.com">Google</a>
+      </li>
+      <li>
+        <a href="google.com">Google</a>
       </li>
     </ul>
   </article>
