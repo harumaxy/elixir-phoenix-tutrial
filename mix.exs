@@ -19,7 +19,7 @@ defmodule Discuss.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Discuss.Application, []},
+      mod: {Discuss.Application, [:ueberauth_github, :ueberauth]},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -45,7 +45,9 @@ defmodule Discuss.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:timex, "~> 3.7"}
+      {:timex, "~> 3.7"},
+      {:ueberauth, "~> 0.6"},
+      {:ueberauth_github, "~> 0.7"}
     ]
   end
 
