@@ -38,7 +38,8 @@ CREATE TABLE public.topics (
     id bigint NOT NULL,
     title character varying(255),
     inserted_at timestamp(0) without time zone NOT NULL,
-    updated_at timestamp(0) without time zone NOT NULL
+    updated_at timestamp(0) without time zone NOT NULL,
+    user_id bigint
 );
 
 
@@ -133,8 +134,17 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: topics topics_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.topics
+    ADD CONSTRAINT topics_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
 INSERT INTO public."schema_migrations" (version) VALUES (20210327151335);
 INSERT INTO public."schema_migrations" (version) VALUES (20210328110554);
+INSERT INTO public."schema_migrations" (version) VALUES (20210328154258);
