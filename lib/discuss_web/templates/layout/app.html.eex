@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Discuss · Phoenix Framework</title>
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/> -->
+    <%# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> %>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
@@ -14,9 +14,25 @@
       <section class="light-blue">
         <nav role="navigation">
           <div class="nav-wrapper container">
-            <a href="/" class="brand-log">
-              Discussions
+          <p>
+            <a href="/topics" class="brand-log">
+                Discussions
             </a>
+          </p>
+
+            <ul>
+              <%# struct ではないmap の場合、キーへのアクセスはbracketで %>
+              <%= if @conn.assigns[:user] do %>
+                <li>
+                  <%= link "Sign Out", to: Routes.auth_path(@conn, :signout) %>
+                </li>
+              <% else %>
+                <li>
+                  <%# Routes.****_path で求めるパスにワイルドカード(path parameter)が含まれる場合は3番目の引数で渡す %>
+                  <%= link "Sign in with Github", to: Routes.auth_path(@conn, :request, "github") %>
+                </li>
+              <% end %>
+            </ul>
           </div>
         </nav>
       </section>
