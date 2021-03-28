@@ -3,7 +3,12 @@ alias Discuss.Topic
 defmodule DiscussWeb.TopicController do
   use DiscussWeb, :controller
 
-  def new(conn, _params) do
+  def index(conn, _params \\ %{}) do
+    topics = Discuss.Repo.all(Topic)
+    render(conn, "index.html", topics: topics)
+  end
+
+  def new(conn, _params \\ %{}) do
     changeset = Topic.changeset(%Topic{}, %{})
 
     # render macro : DiscussWeb.Topic~~~~ Namespace にある Viewの render 関数を呼び出してレスポンス
@@ -23,13 +28,12 @@ defmodule DiscussWeb.TopicController do
 
     case(Discuss.Repo.insert(changeset)) do
       {:ok, post} ->
-        IO.inspect(post)
+        conn
+        |> put_flash(:info, "Topic Created")
+        |> redirect(to: Routes.topic_path(conn, :index))
 
       {:error, err} ->
         render(conn, "new.html", changeset: err)
     end
-
-    IO.inspect(topic)
-    Plug.Conn.send_resp(conn, 200, "CREATE")
   end
 end
